@@ -3,13 +3,16 @@
 
 class Canvas
 {
+	static bool flag;
 private:
 	static void Clear();
 	static void CheckWin();
-	static void DeathAnimation(Player*);
+	//static void DeathAnimation(Player*);
 public:
+	static void DisplayText(const char*,int,int,const Color&);
 	static void Update(int);
 };
+bool Canvas::flag = false;
 
 void Canvas:: Clear()
 {
@@ -17,10 +20,32 @@ void Canvas:: Clear()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void Canvas::DisplayText(const char* text, int x, int y,const Color& c=Color::RED())
+{
+	Color textColor = c;
+	textColor.SetGLColor();
+
+	glRasterPos2f(x, y);
+	size_t len = strlen(text);
+	for (int i = 0; i < len; i++)
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, (int)text[i]);
+	
+}
+
 void  Canvas::Update(int time=100)
 {
+	if (!isGameRunning && flag)
+	{
+		DisplayText("PRESS 'r' to Restart",width/2-100,height/2);
+		glFlush();
+		return; 
+	}
+	if (!isGameRunning)
+		flag = true;
+	else
+		flag = false;
 	Canvas::Clear();
-	
+		
 	if (P1 != NULL)
 	{
 		P1->UpdatePos();
@@ -46,6 +71,7 @@ void  Canvas::Update(int time=100)
 	
 	Canvas::CheckWin();
 
+	
 	glutSwapBuffers();
 	glutTimerFunc(3,Update,0);
 }
@@ -53,6 +79,7 @@ void  Canvas::Update(int time=100)
 //this func checks who wins P1 or P2
 void Canvas::CheckWin()
 {
+
 	if (P1 == NULL || P2 == NULL) return;//defence
 	Vector2 bPoint;//bullet Point
 	int bSize;
@@ -90,16 +117,15 @@ void Canvas::CheckWin()
 			P1Bullet.erase(P1Bullet.begin() + i);
 			P1BulletCount--;
 		}
-		if (hit)//p2 loses and p1 wins
+		
+		if (hit && ++P2HitTaken >= maxHit)//P2 Loses
 		{
 			cout << "P1 WINS" << endl;
-			
-			if (++P2HitTaken >= maxHit)//P2 Loses
-			{
-				P2Alive = false;
-				P2Bullet.clear();
-				P2 = NULL;
-			}
+
+			P2Alive = false;
+			P2Bullet.clear();
+			P2 = NULL;
+			isGameRunning = false;
 			return;
 		}
 	}//P1 Wins Or not
@@ -128,17 +154,20 @@ void Canvas::CheckWin()
 			P2BulletCount--;
 		}
 
-		if (hit)//p1 loses and p2 wins
+		//p1 loses and p2 wins
+		if (hit && ++P1HitTaken >= maxHit)//P1 loses
 		{
 			cout << "P2 WINS" << endl;
-			
-			if (++P1HitTaken >= maxHit)//P1 loses
-			{
-				P1Alive = false;
-				P1 = NULL;
-				P1Bullet.clear();
-			}
+
+			P1Alive = false;
+			P1 = NULL;
+			P1Bullet.clear();
+			isGameRunning = false;
 			return;
 		}
+
 	}//P2 Wins Or Not
 }
+
+
+

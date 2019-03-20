@@ -98,13 +98,13 @@ void Keyboard(unsigned char key, int, int)
 	{
 		switch (key)
 		{
-			case 'p':
+			case '8':
 				P2->MoveUpward();
 				break;
-			case 'l':
+			case '2':
 				P2->MoveDownward();
 				break;
-			case 'o'://P2 Shoots
+			case '5'://P2 Shoots
 				if (P2Bullet.size() < projectileCount)
 				{
 					P2Bullet.push_back(new Projectile(P2->GetCentre()));//P1 bullet based on the curr location of P1
@@ -114,4 +114,40 @@ void Keyboard(unsigned char key, int, int)
 				break;
 		}
 	}//P2 Alive
+
+	switch (key)
+	{
+	case 'r':
+		if(!isGameRunning)
+		ResetGame();
+		break;
+	}
+}
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//					:~>  GAME_AREA <~:
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+void ResetGame()
+{
+	if (P1) delete P1;
+	if (P2) delete P2;
+
+	P1Bullet.clear();
+	P2Bullet.clear();
+
+	P1 = new Player(20, 150);
+	P1->SetColor(0, 255, 120);
+	P1->Draw();
+	P1Alive = true;
+
+	P2 = new Player(width - 20, 150);
+	P2->SetColor(166, 3, 63);
+	P2->Draw();
+	P2Alive = true;
+
+	glFlush();
+	isGameRunning = true;
+	Canvas::Update();
 }

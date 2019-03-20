@@ -3,20 +3,24 @@
 class Projectile:public GameObject
 {
 	int pWidth;			//width of Projectile
-
+	double speed;
+	void init()
+	{
+		speed = 1.5;
+		size = 26;
+		pWidth = 2;
+	}
 public:
 	Projectile(double x=0,double y=0)
 	{
-		size = 26;
-		pWidth = 2;
 		centre.x = x;
 		centre.y = y;
+		init();
 	}
 	Projectile(const Vector2 &point)
 	{
-		size = 26;
-		pWidth = 2;
 		centre = point;
+		init();
 	}
 
 	void MoveForward()  {state = FORWARD; }
@@ -78,11 +82,11 @@ void Projectile::UpdatePos()
 	{
 	case FORWARD:
 		if (centre.x < width)
-			centre.x++;
+			centre.x+=speed;
 		break;
 	case BACKWARD:
 		if (centre.x > 0)
-			centre.x--;
+			centre.x-=speed;
 		break;
 	}
 }

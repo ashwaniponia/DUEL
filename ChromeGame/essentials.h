@@ -31,7 +31,7 @@ struct Color
 	}
 
 	//set color of object
-	void SetColor(int r = 255, int g = 0, int b = 0)
+	void SetColor(int r, int g , int b)
 	{
 		this->r = (float)r / 255;
 		this->g = (float)g / 255;
@@ -42,5 +42,11 @@ struct Color
 	void SetGLColor()
 	{
 		glColor3f(r,g,b);
+	}
+
+	static Color RED()
+	{
+		Color temp(255, 0, 0);
+		return temp;
 	}
 };

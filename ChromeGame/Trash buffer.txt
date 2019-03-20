@@ -50,3 +50,8 @@ void Player::Jump()
 		// P1->Jump();
 		//break;
 	}
+
+
+
+			Canvas::DisplayText("P2 HITS P1",width/2,height/2);
+

@@ -3,6 +3,7 @@
 
 #include "pch.h"			//remove this line if not using Visual Studio
 #include <iostream>
+#include<cstring>
 using namespace std;
 #include<vector>
 #include<GL/glut.h>
@@ -15,7 +16,6 @@ using namespace std;
 #include "GameArea.h"
 #include "canvas.h"
 #include "global.h"
-
 
 int main(int argc,char **argv)
 {
@@ -32,18 +32,12 @@ int main(int argc,char **argv)
 	P2 = new Player(width-20, 150);
 	P2->SetColor(166, 3, 63);
 	P2->Draw();
-	
-	
+
 	glFlush();
 	Canvas::Update();
 	glutMainLoop();
 	return 0;
 }
-
-
-
-
-
 
 //HOPE YOU ENJOYED THE GAME
 //		THANKYOU
