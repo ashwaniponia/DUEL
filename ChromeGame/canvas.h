@@ -94,7 +94,7 @@ void Canvas::CheckWin()
 
 		//check whether i bullet hit the P2 player
 		bool hit = false;
-		int x = bPoint.x + bSize / 2;
+		int x = bPoint.x - bSize / 2;
 		int y = bPoint.y;
 
 		if (y > (p1Point.y - p1Size) && y < (p1Point.y + p1Size))//bullet y is in range of P2
