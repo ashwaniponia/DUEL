@@ -1,4 +1,6 @@
 #pragma once
+//int width, height;
+
 enum STATE
 {
 	FORWARD=1,BACKWARD,JUMP,UPWARD,DOWNWARD

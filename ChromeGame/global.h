@@ -1,5 +1,5 @@
 #pragma once
-int width = 1000;
+int width = 650;
 int height = 400;
 
 //Game variables
@@ -78,22 +78,39 @@ void Keyboard(unsigned char key, int, int)
 	case 27://esc key
 		exit(0);
 	case 'd':
-		//P1->MoveForward();
+		P1->MoveForward();
 		break;
 	case 'a':
-		//P1->MoveBackward();
+		P1->MoveBackward();
 		break;
 	case 'w':
 		P1->MoveUpward();
 		break;
-	case 's':
+	case 'x':
 		P1->MoveDownward();
 		break;
-	case 'o':
+	case 'p':
 		P2->MoveUpward();
 		break;
 	case 'l':
 		P2->MoveDownward();
+		break;
+		//shooting
+	case 's':
+		if (P1Bullet.size() <= 5)
+		{
+			P1Bullet.push_back(new Projectile(P1->GetCentre()));//P1 bullet based on the curr location of P1
+			P1Bullet[P1Bullet.size() - 1]->MoveForward();
+			P1Bullet[P1Bullet.size() - 1]->SetProjectileColor(P1->GetPlayerColor());
+		}
+		break;
+	case 'o':
+		if (P2Bullet.size() <= 5)
+		{
+			P2Bullet.push_back(new Projectile(P2->GetCentre()));//P1 bullet based on the curr location of P1
+			P2Bullet[P2Bullet.size() - 1]->MoveBackward();
+			P2Bullet[P2Bullet.size() - 1]->SetProjectileColor(P2->GetPlayerColor());
+		}
 		break;
 	case 32: // space
 		// P1->Jump();

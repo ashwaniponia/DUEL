@@ -154,6 +154,7 @@
     <ClInclude Include="canvas.h" />
     <ClInclude Include="essentials.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="Projectile.h" />
@@ -168,6 +169,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ToDo.txt" />
     <Text Include="Trash buffer.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

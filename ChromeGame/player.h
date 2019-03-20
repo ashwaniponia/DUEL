@@ -24,7 +24,11 @@ public:
 	void MoveDownward();
 	void Jump();
 	void UpdatePlayerPos();
+
 	int GetState() { return state; }
+	Vector2 GetCentre() { return centre; }
+	Color GetPlayerColor() { return pColor; }
+	int GetSize() { return size; }
 };
 
 //---------------------~>[ Set Player Color ]<~---------------------
@@ -98,3 +102,4 @@ void Player::UpdatePlayerPos()
 		break;
 	}
 }
+

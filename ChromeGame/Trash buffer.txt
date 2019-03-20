@@ -1,1 +1,3 @@
 		//glutTimerFunc(100, Canvas::Update, 100);
+		cout << "COlor is:" << endl;
+		cout << "R:" << color.r << "G:" << color.g << "B:" << color.b << endl;
