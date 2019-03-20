@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="canvas.h" />
     <ClInclude Include="essentials.h" />
+    <ClInclude Include="GameArea.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="pch.h" />

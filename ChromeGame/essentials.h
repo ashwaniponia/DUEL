@@ -1,5 +1,8 @@
 #pragma once
-//int width, height;
+//This File Contains All the Essential Structs And enums Used in the game.
+
+int width = 650;
+int height=400;
 
 enum STATE
 {
@@ -19,13 +22,6 @@ struct Vector2
 struct Color
 {
 	float r, g, b;
-	
-	//Color(float r=1,float g=0,float b=0)
-	//{
-	//	this->r = r;
-	//	this->g = g;
-	//	this->b = b;
-	//}
 
 	Color(int r=255,int g=0,int b=0)
 	{
@@ -34,6 +30,7 @@ struct Color
 		this->b = (float)b/255;
 	}
 
+	//set color of object
 	void SetColor(int r = 255, int g = 0, int b = 0)
 	{
 		this->r = (float)r / 255;
@@ -41,6 +38,7 @@ struct Color
 		this->b = (float)b / 255;
 	}
 
+	//change color of OpenGL
 	void SetGLColor()
 	{
 		glColor3f(r,g,b);

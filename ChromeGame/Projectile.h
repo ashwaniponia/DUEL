@@ -1,40 +1,33 @@
 #pragma once
 
-class Projectile
+class Projectile:public GameObject
 {
-	int state;
-	Vector2 centre;
-	int size;
-	int width;
-	Color color;
+	int pWidth;			//width of Projectile
 
 public:
 	Projectile(double x=0,double y=0)
 	{
 		size = 26;
-		width = 2;
+		pWidth = 2;
 		centre.x = x;
 		centre.y = y;
 	}
 	Projectile(const Vector2 &point)
 	{
 		size = 26;
-		width = 2;
+		pWidth = 2;
 		centre = point;
 	}
-	void Draw();
-	void MoveForward();
-	void MoveBackward();
-	void UpdateProjectilePos();
-	void SetProjectileColor(int r, int g, int b);
-	void SetProjectileColor(const Color& c)	{color = c;}
+
+	void MoveForward()  {state = FORWARD; }
+	void MoveBackward() {state = BACKWARD; }
 	
-	//getters
-	Vector2 GetX() { return centre; }
-	int GetSize() { return size; }
+	//overrided func
+	void Draw();
+	void UpdatePos();
 };
 
-
+//---------------------~>[ Draw ]<~---------------------
 void Projectile::Draw()
 {
 	this->color.SetGLColor();
@@ -44,10 +37,10 @@ void Projectile::Draw()
 	case FORWARD:
 		glBegin(GL_QUADS);//back of arrow
 		
-		glVertex2d(centre.x-size/2,centre.y+width/2);
-		glVertex2d(centre.x-size/2,centre.y-width/2);
-		glVertex2d(centre.x+size/2-10,centre.y-width/2);
-		glVertex2d(centre.x+size/2-10,centre.y+width/2);
+		glVertex2d(centre.x-size/2,centre.y+pWidth/2);
+		glVertex2d(centre.x-size/2,centre.y-pWidth/2);
+		glVertex2d(centre.x+size/2-10,centre.y-pWidth/2);
+		glVertex2d(centre.x+size/2-10,centre.y+ pWidth/2);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);//arrowhead
@@ -61,10 +54,10 @@ void Projectile::Draw()
 	case BACKWARD:
 		glBegin(GL_QUADS);//back of arrow
 
-		glVertex2d(centre.x - size / 2+10, centre.y + width / 2);
-		glVertex2d(centre.x - size / 2+10, centre.y - width / 2);
-		glVertex2d(centre.x + size / 2, centre.y - width / 2);
-		glVertex2d(centre.x + size / 2, centre.y + width / 2);
+		glVertex2d(centre.x - size / 2+10, centre.y + pWidth / 2);
+		glVertex2d(centre.x - size / 2+10, centre.y - pWidth / 2);
+		glVertex2d(centre.x + size / 2, centre.y - pWidth / 2);
+		glVertex2d(centre.x + size / 2, centre.y + pWidth / 2);
 		glEnd();
 
 		glBegin(GL_TRIANGLES);//arrowhead
@@ -78,43 +71,18 @@ void Projectile::Draw()
 	}
 }
 
-//---------------------~>[ Move Forward ]<~---------------------
-void Projectile:: MoveForward()
-{
-	state = FORWARD;
-}
-
-//---------------------~>[ Move Backard ]<~---------------------
-void Projectile::MoveBackward()
-{
-	state = BACKWARD;
-}
-
 //---------------------~>[ UPDATE POSITION ]<~---------------------
-void Projectile::UpdateProjectilePos()
+void Projectile::UpdatePos()
 {
 	switch (state)
 	{
 	case FORWARD:
-		if (centre.x < 1000 - size)
+		if (centre.x < (width - size))
 			centre.x++;
 		break;
 	case BACKWARD:
 		if (centre.x > size)
 			centre.x--;
 		break;
-	/*case DOWNWARD:
-		if (centre.y > size)
-			centre.y--;
-		break;
-	case UPWARD:
-		if (centre.y < 400 - size)
-			centre.y++;
-		break;*/
 	}
-}
-
-void Projectile::SetProjectileColor(int r, int g, int b)
-{
-	color.SetColor(r, g, b);
 }

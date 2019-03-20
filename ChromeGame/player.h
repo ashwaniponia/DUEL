@@ -1,12 +1,8 @@
 #pragma once
 #include "essentials.h"
 
-class Player
+class Player:public GameObject
 {
-	Vector2 centre;
-	Color pColor;
-	int size;
-	int state;
 public:
 	
 	Player(double x=0,double y=0)
@@ -15,32 +11,27 @@ public:
 		centre.x = x;
 		centre.y = y;
 	}
+	Player(const Vector2 point)
+	{
+		size = 20;
+		centre = point;
+	}
 
-	void SetPlayerColor(int,int,int);
+	void MoveForward()  { state = FORWARD; }
+	void MoveBackward() { state = BACKWARD; }
+	void MoveUpward()   { state = UPWARD; }
+	void MoveDownward() { state = DOWNWARD; }
+	//void Jump()         { state = JUMP; }   //plans to use on some other Projects ;)
+
+	//overrided func
 	void Draw();
-	void MoveForward();
-	void MoveBackward();
-	void MoveUpward();
-	void MoveDownward();
-	void Jump();
-	void UpdatePlayerPos();
-
-	int GetState() { return state; }
-	Vector2 GetCentre() { return centre; }
-	Color GetPlayerColor() { return pColor; }
-	int GetSize() { return size; }
+	void UpdatePos();
 };
-
-//---------------------~>[ Set Player Color ]<~---------------------
-void Player:: SetPlayerColor(int r,int g,int b)
-{
-	pColor.SetColor(r,g,b);
-}
 
 //---------------------~>[ Draw ]<~---------------------
 void Player::Draw()
 {
-	this->pColor.SetGLColor();
+	this->color.SetGLColor();
 	glBegin(GL_QUADS);
 	glVertex2i(centre.x-size, centre.y-size);
 	glVertex2i(centre.x+size, centre.y-size);
@@ -49,41 +40,13 @@ void Player::Draw()
 	glEnd();
 }
 
-//---------------------~>[ Move Forward ]<~---------------------
-void Player::MoveForward()
-{
-	state = FORWARD;
-}
-
-//---------------------~>[ Move Backward ]<~---------------------
-void Player::MoveBackward()
-{
-	state = BACKWARD;
-}
-//---------------------~>[ Move Upward ]<~---------------------
-void Player::MoveUpward()
-{
-	state = UPWARD;
-}
-
-//---------------------~>[ Move Downward ]<~---------------------
-void Player::MoveDownward()
-{
-	state = DOWNWARD;
-}
-//---------------------~>[ JUMP ]<~---------------------
-void Player::Jump()
-{
-	state = JUMP;
-}
-
 //---------------------~>[ UPDATE POSITION ]<~---------------------
-void Player::UpdatePlayerPos()
+void Player::UpdatePos()
 {
 	switch(state)
 	{
 	case FORWARD:
-		if(centre.x<1000-size)
+		if(centre.x<width-size)
 		centre.x++;
 		break;
 	case BACKWARD:
@@ -95,11 +58,11 @@ void Player::UpdatePlayerPos()
 			centre.y--;
 		break;
 	case UPWARD:
-		if (centre.y < 400 - size)
+		if (centre.y < height - size)
 			centre.y++;
 		break;
-	case JUMP:
-		break;
+	//case JUMP:
+	//	break;
 	}
 }
 

@@ -1,3 +1,32 @@
 		//glutTimerFunc(100, Canvas::Update, 100);
 		cout << "COlor is:" << endl;
 		cout << "R:" << color.r << "G:" << color.g << "B:" << color.b << endl;
+		
+		void Player::MoveForward()
+{
+	state = FORWARD;
+}
+void Player::MoveBackward()
+{
+	state = BACKWARD;
+}
+void Player::MoveUpward()
+{
+	state = UPWARD;
+}
+
+void Player::MoveDownward()
+{
+	state = DOWNWARD;
+}
+void Player::Jump()
+{
+	state = JUMP;
+}
+
+//Color(float r=1,float g=0,float b=0)
+	//{
+	//	this->r = r;
+	//	this->g = g;
+	//	this->b = b;
+	//}
