@@ -6,6 +6,7 @@ class Canvas
 private:
 	static void Clear();
 	static void CheckWin();
+	static void DeathAnimation(Player*);
 public:
 	static void Update(int);
 };
@@ -18,24 +19,29 @@ void Canvas:: Clear()
 
 void  Canvas::Update(int time=100)
 {
-	if (P1 == NULL || P2==NULL)  return;//defence  (Player Have Not Been Initialized)
 	Canvas::Clear();
 	
-	P1->UpdatePos();
-	P1->Draw();
-
-	P2->UpdatePos();
-	P2->Draw();
-
-	for (int i = 0; i < P1Bullet.size(); i++)//player 1 bullets
+	if (P1 != NULL)
 	{
-		P1Bullet[i]->UpdatePos();
-		P1Bullet[i]->Draw();
+		P1->UpdatePos();
+		P1->Draw();
+
+		for (int i = 0; i < P1Bullet.size(); i++)//player 1 bullets
+		{
+			P1Bullet[i]->UpdatePos();
+			P1Bullet[i]->Draw();
+		}
 	}
-	for (int i = 0; i < P2Bullet.size(); i++)//player 2 bullets
+
+	if (P2 != NULL)
 	{
-		P2Bullet[i]->UpdatePos();
-		P2Bullet[i]->Draw();
+		P2->UpdatePos();
+		P2->Draw();
+		for (int i = 0; i < P2Bullet.size(); i++)//player 2 bullets
+		{
+			P2Bullet[i]->UpdatePos();
+			P2Bullet[i]->Draw();
+		}
 	}
 	
 	Canvas::CheckWin();
@@ -47,6 +53,7 @@ void  Canvas::Update(int time=100)
 //this func checks who wins P1 or P2
 void Canvas::CheckWin()
 {
+	if (P1 == NULL || P2 == NULL) return;//defence
 	Vector2 bPoint;//bullet Point
 	int bSize;
 	
@@ -72,7 +79,10 @@ void Canvas::CheckWin()
 		if (y > (p2Point.y - p2Size) && y < (p2Point.y + p2Size))//bullet y is in range of P2
 		{
 			if (x > (p2Point.x - p2Size))
+			{
 				hit = true;
+				P2->ReduceSize();
+			}
 		}
 		
 		if (x > p2Point.x || hit)
@@ -83,6 +93,9 @@ void Canvas::CheckWin()
 		if (hit)//p2 loses and p1 wins
 		{
 			cout << "P1 WINS" << endl;
+			P2Alive = false;
+			P2Bullet.clear();
+			P2 = NULL;
 			return;
 		}
 	}//P1 Wins Or not
@@ -100,7 +113,10 @@ void Canvas::CheckWin()
 		if (y > (p1Point.y - p1Size) && y < (p1Point.y + p1Size))//bullet y is in range of P2
 		{
 			if (x < (p1Point.x + p1Size))
+			{
 				hit = true;
+				P1->ReduceSize();
+			}
 		}
 		if (x <p1Point.x || hit)//to vanish unused bullets of P2
 		{
@@ -111,6 +127,9 @@ void Canvas::CheckWin()
 		if (hit)//p1 loses and p2 wins
 		{
 			cout << "P2 WINS" << endl;
+			P1Alive = false;
+			P1 = NULL;
+			P1Bullet.clear();
 			return;
 		}
 	}//P2 Wins Or Not

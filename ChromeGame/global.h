@@ -71,49 +71,47 @@ void Display(){}
 void Keyboard(unsigned char key, int, int)
 {
 	//std::cout << (int)key;
-	switch (key)
+	if (P1Alive)
 	{
-	case 27://esc key
-		exit(0);
-	case 'd':
-		//P1->MoveForward();
-		break;
-	case 'a':
-		//P1->MoveBackward();
-		break;
-	case 'w':
-		P1->MoveUpward();
-		break;
-	case 'x':
-		P1->MoveDownward();
-		break;
-
-	case 'p':
-		P2->MoveUpward();
-		break;
-	case 'l':
-		P2->MoveDownward();
-		break;
-
-		//shooting
-	case 's':
-		if (P1Bullet.size() < projectileCount)
+		switch (key)
 		{
-			P1Bullet.push_back(new Projectile(P1->GetCentre()));//P1 bullet based on the curr location of P1
-			P1Bullet[P1Bullet.size() - 1]->MoveForward();
-			P1Bullet[P1Bullet.size() - 1]->SetColor(P1->GetPlayerColor());
+		case 'w':
+			P1->MoveUpward();
+			break;
+
+		case 'x':
+			P1->MoveDownward();
+			break;
+
+		case 's'://P1 Shoots
+			if (P1Bullet.size() < projectileCount)
+			{
+				P1Bullet.push_back(new Projectile(P1->GetCentre()));//P1 bullet based on the curr location of P1
+				P1Bullet[P1Bullet.size() - 1]->MoveForward();
+				P1Bullet[P1Bullet.size() - 1]->SetColor(P1->GetPlayerColor());
+			}
+			break;
 		}
-		break;
-	case 'o':
-		if (P2Bullet.size() < projectileCount)
+	}//P1 Alive
+
+	if (P2Alive)
+	{
+		switch (key)
 		{
-			P2Bullet.push_back(new Projectile(P2->GetCentre()));//P1 bullet based on the curr location of P1
-			P2Bullet[P2Bullet.size() - 1]->MoveBackward();
-			P2Bullet[P2Bullet.size() - 1]->SetColor(P2->GetPlayerColor());
+			case 'p':
+				P2->MoveUpward();
+				break;
+			case 'l':
+				P2->MoveDownward();
+				break;
+			case 'o'://P2 Shoots
+				if (P2Bullet.size() < projectileCount)
+				{
+					P2Bullet.push_back(new Projectile(P2->GetCentre()));//P1 bullet based on the curr location of P1
+					P2Bullet[P2Bullet.size() - 1]->MoveBackward();
+					P2Bullet[P2Bullet.size() - 1]->SetColor(P2->GetPlayerColor());
+				}
+				break;
 		}
-		break;
-	//case 32: // space
-		// P1->Jump();
-		//break;
-	}
+	}//P2 Alive
 }

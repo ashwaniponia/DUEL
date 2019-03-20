@@ -30,3 +30,23 @@ void Player::Jump()
 	//	this->g = g;
 	//	this->b = b;
 	//}
+
+
+
+	switch (key)
+	{
+	case 27://esc key
+		exit(0);
+	case 'd':
+		//P1->MoveForward();
+		break;
+	case 'a':
+		//P1->MoveBackward();
+		break;
+	
+
+	
+	//case 32: // space
+		// P1->Jump();
+		//break;
+	}

@@ -77,11 +77,11 @@ void Projectile::UpdatePos()
 	switch (state)
 	{
 	case FORWARD:
-		if (centre.x < (width - size))
+		if (centre.x < width)
 			centre.x++;
 		break;
 	case BACKWARD:
-		if (centre.x > size)
+		if (centre.x > 0)
 			centre.x--;
 		break;
 	}

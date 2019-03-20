@@ -23,6 +23,8 @@ public:
 	void MoveDownward() { state = DOWNWARD; }
 	//void Jump()         { state = JUMP; }   //plans to use on some other Projects ;)
 
+	void ReduceSize();
+
 	//overrided func
 	void Draw();
 	void UpdatePos();
@@ -32,6 +34,7 @@ public:
 void Player::Draw()
 {
 	this->color.SetGLColor();
+
 	glBegin(GL_QUADS);
 	glVertex2i(centre.x-size, centre.y-size);
 	glVertex2i(centre.x+size, centre.y-size);
@@ -66,3 +69,14 @@ void Player::UpdatePos()
 	}
 }
 
+void Player:: ReduceSize()
+{
+	if (size > 10)
+	{
+		size -= 2;
+		if (centre.x < width / 2)//P1
+			centre.x -= 2;
+		else					//P2
+			centre.x += 2;
+	}
+}

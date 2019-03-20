@@ -13,7 +13,8 @@ public:
 	//common logic
 	void SetColor(int r, int g, int b) { color.SetColor(r, g, b); }
 	void SetColor(const Color &c) { color = c; }
-	
+	void Dstroy() { state = DEAD; }
+
 	int GetState() { return state; }
 	Vector2 GetCentre() { return centre; }
 	Color GetPlayerColor() { return color; }
