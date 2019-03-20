@@ -7,7 +7,9 @@
 #### Shoot: s
 
 ### Player 2 Controls
-#### Move Upwards: p 
-#### Move Downwards: l
-#### Shoot: o
+#### Move Upwards: 8
+#### Move Downwards:2
+#### Shoot: 5
+
+or you can personalize controls in Keyboard Func defined in "global.h".
 
