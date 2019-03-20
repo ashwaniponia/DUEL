@@ -93,9 +93,13 @@ void Canvas::CheckWin()
 		if (hit)//p2 loses and p1 wins
 		{
 			cout << "P1 WINS" << endl;
-			P2Alive = false;
-			P2Bullet.clear();
-			P2 = NULL;
+			
+			if (++P2HitTaken >= maxHit)//P2 Loses
+			{
+				P2Alive = false;
+				P2Bullet.clear();
+				P2 = NULL;
+			}
 			return;
 		}
 	}//P1 Wins Or not
@@ -127,9 +131,13 @@ void Canvas::CheckWin()
 		if (hit)//p1 loses and p2 wins
 		{
 			cout << "P2 WINS" << endl;
-			P1Alive = false;
-			P1 = NULL;
-			P1Bullet.clear();
+			
+			if (++P1HitTaken >= maxHit)//P1 loses
+			{
+				P1Alive = false;
+				P1 = NULL;
+				P1Bullet.clear();
+			}
 			return;
 		}
 	}//P2 Wins Or Not
