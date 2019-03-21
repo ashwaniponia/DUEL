@@ -1,9 +1,9 @@
+//#8.
 //this is the main file.
 //Please Don't change the order of Header Files included as Program Will not Work Properly(eopPGcg).
 
 #include "pch.h"			//remove this line if not using Visual Studio
 #include <iostream>
-#include<cstring>
 using namespace std;
 #include<vector>
 #include<GL/glut.h>

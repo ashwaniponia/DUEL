@@ -1,4 +1,5 @@
 #pragma once
+//#7.
 //this File is Responsible for all the Initialization and registering GLUT callbacks.
 
 
@@ -136,6 +137,9 @@ void ResetGame()
 
 	P1Bullet.clear();
 	P2Bullet.clear();
+
+	P1HitTaken = 0;
+	P2HitTaken = 0;
 
 	P1 = new Player(20, 150);
 	P1->SetColor(0, 255, 120);

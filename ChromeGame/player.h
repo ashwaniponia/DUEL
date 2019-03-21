@@ -1,20 +1,26 @@
 #pragma once
+//#3.
 #include "essentials.h"
 
 class Player:public GameObject
 {
+	void Init()
+	{
+		size = 20;
+		speed = 1.8;
+	}
 public:
 	
 	Player(double x=0,double y=0)
 	{
-		size = 20;
 		centre.x = x;
 		centre.y = y;
+		Init();
 	}
 	Player(const Vector2 point)
 	{
-		size = 20;
 		centre = point;
+		Init();
 	}
 
 	void MoveForward()  { state = FORWARD; }
@@ -50,19 +56,19 @@ void Player::UpdatePos()
 	{
 	case FORWARD:
 		if(centre.x<width-size)
-		centre.x++;
+		centre.x+=speed;
 		break;
 	case BACKWARD:
 		if(centre.x>size)
-		centre.x--;
+		centre.x-=speed;
 		break;
 	case DOWNWARD:
 		if (centre.y > size)
-			centre.y--;
+			centre.y-=speed;
 		break;
 	case UPWARD:
 		if (centre.y < height - size)
-			centre.y++;
+			centre.y+=speed;
 		break;
 	//case JUMP:
 	//	break;

@@ -1,12 +1,13 @@
 #pragma once
+//#4.
 
 class Projectile:public GameObject
 {
 	int pWidth;			//width of Projectile
-	double speed;
+	
 	void init()
 	{
-		speed = 1.5;
+		speed = 1.8;
 		size = 26;
 		pWidth = 2;
 	}

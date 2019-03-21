@@ -1,4 +1,5 @@
 #pragma once
+//#2.
 //Abstract Base Class For All GameObjects
 
 class GameObject
@@ -8,6 +9,7 @@ protected:
 	Color color;			//color of GameObject
 	int size;				//size of GameObject
 	int state;				//state during game
+	double speed;			//speed of gameobject
 public:
 
 	//common logic

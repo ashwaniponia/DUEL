@@ -1,4 +1,5 @@
 #pragma once
+//#6.
 //This File is Responsible For Drawing on The Screen.
 
 class Canvas
@@ -28,7 +29,7 @@ void Canvas::DisplayText(const char* text, int x, int y,const Color& c=Color::RE
 	glRasterPos2f(x, y);
 	size_t len = strlen(text);
 	for (int i = 0; i < len; i++)
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, (int)text[i]);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, (int)text[i]);
 	
 }
 
@@ -36,7 +37,13 @@ void  Canvas::Update(int time=100)
 {
 	if (!isGameRunning && flag)
 	{
-		DisplayText("PRESS 'r' to Restart",width/2-100,height/2);
+		Color winColor(0,0,0);
+		if (P1Alive)
+			winColor = P1->GetPlayerColor();
+		else
+			winColor = P2->GetPlayerColor();
+		DisplayText("PRESS 'r' to Restart",width/2-120-1,height/2,winColor);
+		DisplayText("PRESS 'r' to Restart",width/2-120,height/2,winColor);
 		glFlush();
 		return; 
 	}
@@ -71,9 +78,8 @@ void  Canvas::Update(int time=100)
 	
 	Canvas::CheckWin();
 
-	
 	glutSwapBuffers();
-	glutTimerFunc(3,Update,0);
+	glutTimerFunc(4,Update,0);
 }
 
 //this func checks who wins P1 or P2

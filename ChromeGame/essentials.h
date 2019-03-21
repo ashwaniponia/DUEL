@@ -1,4 +1,5 @@
 #pragma once
+//#1.
 //This File Contains All the Essential Structs And enums Used in the game.
 
 int width = 650;
@@ -44,9 +45,14 @@ struct Color
 		glColor3f(r,g,b);
 	}
 
-	static Color RED()
-	{
-		Color temp(255, 0, 0);
-		return temp;
-	}
+	//some Static Colors
+	static Color RED()        {	Color temp(255, 0, 0)    ;return temp;}
+	static Color GREEN()      {	Color temp(0,255, 0)     ;return temp;}
+	static Color BLUE()       {	Color temp(0, 0, 255)    ;return temp;}
+	static Color CYAN()       {	Color temp(0, 255, 255)  ;return temp;}
+	static Color MAGENTA()    {	Color temp(255, 0, 255)  ;return temp;}
+	static Color YELLOW()     {	Color temp(255, 255, 0)  ;return temp;}
+	static Color SPRINGGREEN(){	Color temp(20, 255, 127) ;return temp;}
+	static Color TEAL()       {	Color temp(0,128,128)    ;return temp;}
+
 };
