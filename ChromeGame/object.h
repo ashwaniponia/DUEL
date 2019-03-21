@@ -1,6 +1,7 @@
 #pragma once
 //#2.
 //Abstract Base Class For All GameObjects
+#include "essentials.h"
 
 class GameObject
 {

@@ -39,10 +39,18 @@ void  Canvas::Update(int time=100)
 	{
 		Color winColor(0,0,0);
 		if (P1Alive)
+		{
 			winColor = P1->GetPlayerColor();
+			DisplayText("P1 WINS",width/2-60-1,height/2+50,Color::TEAL());
+			DisplayText("P1 WINS",width/2-60,height/2+50,Color::TEAL());
+		}
 		else
+		{
 			winColor = P2->GetPlayerColor();
-		DisplayText("PRESS 'r' to Restart",width/2-120-1,height/2,winColor);
+			DisplayText("P2 WINS", width / 2 - 60-1, height / 2 + 50, Color::TEAL());
+			DisplayText("P2 WINS", width / 2 - 60, height / 2 + 50, Color::TEAL());
+		}
+		DisplayText("PRESS 'r' to Restart", width / 2 - 120 - 1, height / 2, winColor);
 		DisplayText("PRESS 'r' to Restart",width/2-120,height/2,winColor);
 		glFlush();
 		return; 

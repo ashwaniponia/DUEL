@@ -1,6 +1,7 @@
 #pragma once
 //#1.
 //This File Contains All the Essential Structs And enums Used in the game.
+#include<GL/glut.h>
 
 int width = 650;
 int height=400;

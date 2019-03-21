@@ -1,5 +1,6 @@
 #pragma once
 //#4.
+#include "object.h"
 
 class Projectile:public GameObject
 {
